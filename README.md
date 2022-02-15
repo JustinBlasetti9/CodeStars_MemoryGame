@@ -1,4 +1,4 @@
-Name of Team: (put some ideas here)
+Name of Team:
 CodeStars
 First name:
 Justin
@@ -43,7 +43,7 @@ N
 Lab Section: 
 03
 Project Title:
-Project 6 (Random Number Memorization)
+Random Number Memorization
 
 
 
