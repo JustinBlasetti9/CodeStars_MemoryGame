@@ -91,3 +91,4 @@ In hard mode, the player receives more points for each round since there is more
 
 
 While playing the game, the user can see a bar representing the time they have left during a round
+![Combined Wireframes 1022 Phase 2 drawio](https://user-images.githubusercontent.com/92050664/154168590-62f2ccc2-339e-422a-8cbe-90beed7e5a31.png)
