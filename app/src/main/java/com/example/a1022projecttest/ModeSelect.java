@@ -30,13 +30,13 @@ public class ModeSelect extends AppCompatActivity {
         normalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openHardGame();
+                openNormalGame();
             }
         });
         hardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openNormalGame();
+                openHardGame();
             }
         });
     }
@@ -46,10 +46,12 @@ public class ModeSelect extends AppCompatActivity {
     }
     public void openNormalGame(){
         Intent intent = new Intent(this, GameScreen.class);
+        intent.putExtra("modeSelected", "normal");
         startActivity(intent);
     }
     public void openHardGame(){
         Intent intent = new Intent(this, GameScreen.class);
+        intent.putExtra("modeSelected", "hard");
         startActivity(intent);
     }
 }
