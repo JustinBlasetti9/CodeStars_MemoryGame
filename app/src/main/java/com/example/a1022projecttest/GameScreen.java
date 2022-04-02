@@ -1,8 +1,10 @@
 package com.example.a1022projecttest;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -17,15 +19,15 @@ public class GameScreen extends AppCompatActivity {
     private TextView gameTimer;
     private Button submitButton, backToMainButton, saveScoreButton;
     private CountDownTimer countdown;
-    private long timeLeftMS=5000; //5 mins
+    private long timeLeftMS=5500; //5 mins
     private int timesPressed=0;
-    private TextView generatedNumber, displayedRound, currentScore;
+    private TextView generatedNumber, displayedRound, currentScore, gameOverMessage;
     private EditText userGuess;
     private int currentRound= 1;
     private String theCode="";
     private String mode = "";
     private int score = 0;
-
+    private ConstraintLayout mainBackground;
 
 
     @Override
@@ -46,7 +48,8 @@ public class GameScreen extends AppCompatActivity {
         userGuess = findViewById(R.id.userGuess);
         displayedRound = findViewById(R.id.gameRound);
         currentScore=findViewById(R.id.currentScore);
-
+        gameOverMessage = findViewById(R.id.gameOverMsg);
+        mainBackground = findViewById(R.id.gameBackground);
         //create the first round code based on normal or hard mode
         if (this.mode.equals("normal")){
             addDigit();
@@ -60,7 +63,7 @@ public class GameScreen extends AppCompatActivity {
         submitButton.setVisibility(View.INVISIBLE);
         backToMainButton.setVisibility(View.INVISIBLE);
         saveScoreButton.setVisibility(View.INVISIBLE);
-
+        gameOverMessage.setVisibility(View.INVISIBLE);
         //set the textview of the code to the generated code
         generatedNumber.setText(this.theCode);
 
@@ -102,7 +105,9 @@ public class GameScreen extends AppCompatActivity {
             userGuess.setText("");
             //decrease the time given to remember the code every round
             timesPressed+=1;
-            timeLeftMS=5000-((long)100 *timesPressed);
+            if (timesPressed<5) {
+                timeLeftMS = 5500 - ((long) 250 * timesPressed);
+            }
             countdown.cancel();
             startTimer();
             //increment the round by 1
@@ -173,7 +178,16 @@ public class GameScreen extends AppCompatActivity {
 
         submitButton.setVisibility(View.INVISIBLE);
         userGuess.setVisibility(View.INVISIBLE);
-        generatedNumber.setText("Game Over!\n\n\nYour Answer: "+userGuess.getText().toString()+"\n\nActual Code: "+ this.theCode);
+        gameOverMessage.setVisibility(View.VISIBLE);
+        gameOverMessage.setText("Game Over!");
+        currentScore.setTextSize(20);
+        currentScore.setTextColor(Color.parseColor("#E2FF21"));
+        generatedNumber.setText("\n\n Your Answer: "+userGuess.getText().toString()+"\n\nActual Code: "+ this.theCode);
+        gameOverMessage.setTextColor(Color.parseColor("#FF2121"));
+        gameOverMessage.setTextSize(28);
+        saveScoreButton.setBackgroundColor(Color.parseColor("#63B848"));
+        backToMainButton.setBackgroundColor(Color.parseColor("#FF082A"));
+        mainBackground.setBackgroundColor(Color.parseColor("#E88E8E"));
         backToMainButton.setVisibility(View.VISIBLE);
         saveScoreButton.setVisibility(View.VISIBLE);
     }

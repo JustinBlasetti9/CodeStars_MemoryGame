@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GameScreen">
-
+    tools:context=".GameScreen"
+    android:background="@drawable/game_screen_background"
+    android:id="@+id/gameBackground">
     <TextView
         android:id="@+id/textView13"
         android:layout_width="419dp"
@@ -13,7 +14,7 @@
         android:background="@drawable/text_border1"
         android:backgroundTint="#808080"
         android:backgroundTintMode="add"
-        android:text="Created by: CodeStars, Course: EECS 1012, Created on: 03/18/22"
+        android:text="Created by: CodeStars, Course: EECS 1022, Created on: 03/18/22"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -25,6 +26,8 @@
         android:layout_height="48dp"
         android:ems="10"
         android:hint="Type your guess here..."
+        android:textColor="#F4F2F2"
+        android:textColorHint="#F8F8F8"
         app:layout_constraintBottom_toTopOf="@+id/textView13"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -36,6 +39,8 @@
         android:id="@+id/submitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#C5B400"
+        android:fontFamily="sans-serif-black"
         android:text="Submit Guess"
         app:layout_constraintBottom_toTopOf="@+id/textView13"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,47 +51,54 @@
         android:id="@+id/generatedNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0"
+        android:fontFamily="sans-serif-black"
+        android:text="Code"
         android:textAlignment="center"
+        android:textColor="#FFFDFD"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/userGuess"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.721" />
+        app:layout_constraintVertical_bias="0.848" />
 
     <TextView
         android:id="@+id/gameTimer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="5"
+        android:text="Timer"
         android:textAlignment="center"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/generatedNumber"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.607" />
+        app:layout_constraintVertical_bias="0.761" />
 
     <TextView
         android:id="@+id/gameRound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
         android:text="Round 1"
         android:textAlignment="center"
+        android:textColor="#F8F8F8"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/gameTimer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.301" />
+        app:layout_constraintVertical_bias="0.254" />
 
     <Button
         android:id="@+id/gameOverButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="monospace"
         android:text="Return to Main Menu"
         app:layout_constraintBottom_toTopOf="@+id/textView13"
         app:layout_constraintEnd_toEndOf="parent"
@@ -97,12 +109,16 @@
         android:id="@+id/currentScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
         android:text="Score: 0"
         android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/gameTimer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gameRound" />
+        app:layout_constraintTop_toBottomOf="@+id/gameRound"
+        app:layout_constraintVertical_bias="0.421" />
 
     <Button
         android:id="@+id/saveScore"
@@ -114,5 +130,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.76" />
+
+    <TextView
+        android:id="@+id/gameOverMsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:text="Game over message"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/generatedNumber"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.926" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
