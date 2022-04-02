@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/text_border1"
-    android:backgroundTint="#FFFFFF"
+    android:background="@color/white"
+    android:backgroundTint="#B8FFF2"
     tools:context=".MainMenu">
 
     <TextView
@@ -26,8 +26,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/text_border1"
+        android:backgroundTint="#000000"
+        android:fontFamily="monospace"
         android:padding="10dp"
         android:text="Welcome to the Code Memorization Game!"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -63,6 +68,7 @@
         android:id="@+id/playButton"
         android:layout_width="181dp"
         android:layout_height="77dp"
+        android:backgroundTint="#4CAF50"
         android:text="Play"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"

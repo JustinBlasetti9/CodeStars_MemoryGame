@@ -11,18 +11,22 @@ import android.widget.EditText;
 import android.widget.TextView;
 import java.util.Random;
 
+
 public class GameScreen extends AppCompatActivity {
 
     private TextView gameTimer;
-    private Button submitButton, backToMainButton;
+    private Button submitButton, backToMainButton, saveScoreButton;
     private CountDownTimer countdown;
     private long timeLeftMS=5000; //5 mins
     private int timesPressed=0;
-    private TextView generatedNumber, displayedRound;
+    private TextView generatedNumber, displayedRound, currentScore;
     private EditText userGuess;
     private int currentRound= 1;
     private String theCode="";
     private String mode = "";
+    private int score = 0;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +41,11 @@ public class GameScreen extends AppCompatActivity {
         gameTimer = findViewById(R.id.gameTimer);
         submitButton = (Button) findViewById(R.id.submitButton);
         backToMainButton = (Button) findViewById(R.id.gameOverButton);
+        saveScoreButton = (Button) findViewById(R.id.saveScore);
         generatedNumber = findViewById(R.id.generatedNumber);
         userGuess = findViewById(R.id.userGuess);
         displayedRound = findViewById(R.id.gameRound);
+        currentScore=findViewById(R.id.currentScore);
 
         //create the first round code based on normal or hard mode
         if (this.mode.equals("normal")){
@@ -53,6 +59,7 @@ public class GameScreen extends AppCompatActivity {
         userGuess.setVisibility(View.INVISIBLE);
         submitButton.setVisibility(View.INVISIBLE);
         backToMainButton.setVisibility(View.INVISIBLE);
+        saveScoreButton.setVisibility(View.INVISIBLE);
 
         //set the textview of the code to the generated code
         generatedNumber.setText(this.theCode);
@@ -66,6 +73,14 @@ public class GameScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 openMainMenu();
+
+            }
+        });
+
+        saveScoreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openLeaderBoard();
             }
         });
 
@@ -97,10 +112,15 @@ public class GameScreen extends AppCompatActivity {
             //if the selected mode from ModeSelect is normal, add a number, otherwise add a letter to the code
             if (this.mode.equals("normal")){
                 addDigit();
+                this.score+=50;
+
             }
             else{
                 addLetter();
+                this.score+=100;
+
             }
+            currentScore.setText("Score: "+this.score);
 
             //display the current code after adding
             generatedNumber.setText(this.theCode);
@@ -155,6 +175,7 @@ public class GameScreen extends AppCompatActivity {
         userGuess.setVisibility(View.INVISIBLE);
         generatedNumber.setText("Game Over!\n\n\nYour Answer: "+userGuess.getText().toString()+"\n\nActual Code: "+ this.theCode);
         backToMainButton.setVisibility(View.VISIBLE);
+        saveScoreButton.setVisibility(View.VISIBLE);
     }
 
     public void timesUp(){
@@ -186,5 +207,13 @@ public class GameScreen extends AppCompatActivity {
         int randomNum = (int)Math.floor(Math.random()*(max-min+1)+min);
         //convert the ASCII values to their respective characters (0 to 9 or A to z) and add it to the game code
         this.theCode+=(char) randomNum;
+    }
+
+
+    public void openLeaderBoard(){
+        //returns to the main menu screen
+        Intent intent = new Intent(this, Leaderboard.class);
+        intent.putExtra("scoreToBeSaved", this.score);
+        startActivity(intent);
     }
 }

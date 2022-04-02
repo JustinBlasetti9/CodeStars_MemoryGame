@@ -45,6 +45,7 @@ public class MainMenu extends AppCompatActivity {
     }
     public void openLeaderboards(){
         Intent intent = new Intent(this, Leaderboard.class);
+        intent.putExtra("scoreToBeSaved", -1);
         startActivity(intent);
     }
     public void openPlay(){
