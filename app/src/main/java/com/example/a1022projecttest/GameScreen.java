@@ -15,18 +15,18 @@ import java.util.Random;
 
 
 public class GameScreen extends AppCompatActivity {
-
+    //initialize several variables to store textviews/edit text views and buttons from the xml files
     private TextView gameTimer;
     private Button submitButton, backToMainButton, saveScoreButton;
     private CountDownTimer countdown;
-    private long timeLeftMS=5500; //5 mins
-    private int timesPressed=0;
+    private long timeLeftMS=5500; //variable that stores the timer in milliseconds
+    private int timesPressed=0; //tracks how many times the user submits an answer
     private TextView generatedNumber, displayedRound, currentScore, gameOverMessage;
     private EditText userGuess;
-    private int currentRound= 1;
+    private int currentRound= 1; //variable to store the current round
     private String theCode="";
     private String mode = "";
-    private int score = 0;
+    private int score = 0; // variable to store user's score in the current game
     private ConstraintLayout mainBackground;
 
 
@@ -50,6 +50,7 @@ public class GameScreen extends AppCompatActivity {
         currentScore=findViewById(R.id.currentScore);
         gameOverMessage = findViewById(R.id.gameOverMsg);
         mainBackground = findViewById(R.id.gameBackground);
+
         //create the first round code based on normal or hard mode
         if (this.mode.equals("normal")){
             addDigit();
@@ -72,6 +73,8 @@ public class GameScreen extends AppCompatActivity {
 
         //start the timer when page is loaded
         startTimer();
+
+        //set an on click attribute to the return to main menu button to return to the main menu
         backToMainButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,6 +83,7 @@ public class GameScreen extends AppCompatActivity {
             }
         });
 
+        //set an on click attribute for the save score button to bring the user to the leaderboard screen
         saveScoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,6 +112,11 @@ public class GameScreen extends AppCompatActivity {
             if (timesPressed<5) {
                 timeLeftMS = 5500 - ((long) 250 * timesPressed);
             }
+
+            //after round 5, timer will no longer decrease and stabilizes
+            else{
+                timeLeftMS = 4500;
+            }
             countdown.cancel();
             startTimer();
             //increment the round by 1
@@ -125,6 +134,7 @@ public class GameScreen extends AppCompatActivity {
                 this.score+=100;
 
             }
+            //update the score to accurately reflect the users current points
             currentScore.setText("Score: "+this.score);
 
             //display the current code after adding
@@ -165,6 +175,8 @@ public class GameScreen extends AppCompatActivity {
             }
         }.start();
     }
+
+    //adds a digit to the code in easy mode
     public void addDigit(){
         //uses the random library to generate a random number from 0 to 9 and then adds it to the code
         Random randomDigit = new Random();
@@ -172,6 +184,7 @@ public class GameScreen extends AppCompatActivity {
         this.theCode+=digit;
     }
 
+    //sets the game over screen
     public void gameOver(){
         //set submit button, current round, and the textbox to be invisible and display a game over message with a return to main menu button
         displayedRound.setVisibility(View.INVISIBLE);
@@ -192,6 +205,7 @@ public class GameScreen extends AppCompatActivity {
         saveScoreButton.setVisibility(View.VISIBLE);
     }
 
+    //changes the screen to hide timer and code
     public void timesUp(){
         //set the code to be invisible and prompt the user to give their guess
         userGuess.setVisibility(View.VISIBLE);
@@ -227,6 +241,8 @@ public class GameScreen extends AppCompatActivity {
     public void openLeaderBoard(){
         //returns to the main menu screen
         Intent intent = new Intent(this, Leaderboard.class);
+
+        //passes data to the leaderboard activity (user's final score)
         intent.putExtra("scoreToBeSaved", this.score);
         startActivity(intent);
     }
